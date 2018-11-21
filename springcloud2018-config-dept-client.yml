@@ -1,0 +1,63 @@
+spring: 
+  profiles: 
+    active: 
+    - dev
+---
+server:
+  port: 8001 #注册中心占用8001端口，冒号后必须有空格
+spring: 
+  profiles: dev     #开发环境
+  application: 
+    name: mircroservicecloud-config-dept-client
+  datasource :
+    url: jdbc:mysql://10.108.10.55:3306/cloudDB01?useAffectedRows=true&allowMultiQueries=true&rewriteBatchedStatements=true&useUnicode=true&characterEncoding=utf-8
+    username: allways
+    password: 1qaz@WSX_321
+    driver-class-name: com.mysql.jdbc.Driver
+mybatis: 
+  config-location: classpath:mybatis/mybatis.cfg.xml
+  type-aliases-package: com.xk.entity
+  mapper-locations: 
+  - classpath:mybatis/mapper/**/*.xml    
+eureka:
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.cloud.client.ipAddress}:${server.port}
+  client: 
+    service-url: 
+        defaultZone: http://eureka7001:7001/eureka/
+info:
+  app.name: mircroservicecloud-config-dept-client-info
+  company.name :  www.xk.com
+  build.artifactId: $project.artifactId$
+  build.version: $project.version$
+---
+server:
+  port: 8001 #注册中心占用8001端口，冒号后必须有空格
+spring: 
+  profiles: test     #测试环境
+  application: 
+    name: mircroservicecloud-config-dept-client
+  datasource :
+    url: jdbc:mysql://10.108.10.55:3306/cloudDB02?useAffectedRows=true&allowMultiQueries=true&rewriteBatchedStatements=true&useUnicode=true&characterEncoding=utf-8
+    username: allways
+    password: 1qaz@WSX_321
+    driver-class-name: com.mysql.jdbc.Driver
+
+mybatis: 
+  config-location: classpath:mybatis/mybatis.cfg.xml
+  type-aliases-package: com.xk.entity
+  mapper-locations: 
+  - classpath:mybatis/mapper/**/*.xml    
+eureka:
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.cloud.client.ipAddress}:${server.port}
+  client: 
+    service-url: 
+        defaultZone: http://eureka7001:7001/eureka/
+info:
+  app.name: mircroservicecloud-config-dept-client-info
+  company.name :  www.xk.com
+  build.artifactId: $project.artifactId$
+  build.version: $project.version$
